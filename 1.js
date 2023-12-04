@@ -5,15 +5,11 @@ console.log(inputArr.reduce( (sum, line) => sum + parseInt(`${line.match(/\d/g)[
 
 
 // Part 2
-const pairs = inputArr.map((line) => {
-  const matches = line.match(/one|two|three|four|five|six|seven|eight|nine|\d/g)
-  return [matches[0], matches[matches.length - 1]]
-})
-
 const numStrings = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 
-const ints = pairs.map((pair) => {
- return parseInt(`${/\d/.test(pair[0]) ? pair[0] : numStrings.indexOf(pair[0])}${/\d/.test(pair[1]) ? pair[1] : numStrings.indexOf(pair[1])}`)
-})
+const day2Sum = inputArr.reduce((sum, line) => {
+  const matches = line.match(/one|two|three|four|five|six|seven|eight|nine|\d/g)
+  return sum + parseInt(`${/\d/.test(matches[0]) ? matches[0] : numStrings.indexOf(matches[0])}${/\d/.test(matches[matches.length - 1]) ? matches[matches.length - 1] : numStrings.indexOf(matches[matches.length - 1])}`)
+}, 0)
 
-console.log(ints.reduce((sum, n) => sum + n, 0))
+console.log(day2Sum)
